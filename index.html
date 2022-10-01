@@ -1,0 +1,124 @@
+
+<!--
+ * @Author: nghiemtv.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nhật Ánh 😍</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style0.css" />
+  </head>
+
+  <body>
+    <div onclick="soundplay()" class="container">
+      <div class="typing">
+        <h2 class="header-sub-title" id="word"></h2>
+        <h2 class="header-sub-title blink">|</h2>
+      </div>
+      <audio class="_sound" controls autoplay loop="loop"><source src="music3.mp3" /></audio>
+      <div class="box">
+        <ul class="minbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <ol class="maxbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+
+    <script src="jquery.min.js"></script>
+    <script src="/TweenMax.min.js"></script>
+    <script src="index.js"></script>
+
+    <script>
+
+      if (
+        navigator.userAgent.match(
+          /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        )
+      ) {
+        var box = document.querySelectorAll(".box")[0];
+        console.log(box, "移动端");
+        box.style.left = "42%";
+      }
+      const words = [
+        "❤ Hello bạn Duyên,cô gái nhỏ nhắn xinh xinh😬",
+        "❤ Hm........",
+        "❤ Bây giờ mình nên nói gì ta",
+        "❤ Hm.......",
+        "❤ mình chỉ có thể viết được trang web đơn giản này coi như món quá gửi đến bạn",
+        "❤ mình cũng chẳng biết nói gì hết,chúc bạn Duyên tuổi mới ngày càng xinh đẹp,lạc quan,yêu đời",
+        "❤ Và sớm tìm được chân ái của cuộc đời mình nữa😄",
+        "❤ À,mong chúng mình mãi là bạn tốt của nhau nữa kkkk😅",
+        "❤ 1 lần nữa mình chúc bạn Duyên có 1 sinh nhật vui vẻ nè😍",
+        "❤ Tạm biệt  kkkk",
+        "❤ Ký tên.......................................❤ Đạt băng giá siêu ngầu",
+      ];
+      let PPP = 0;
+      let timer;
+      let deleteDelay = 3000;
+      let typeSpeed = 100;
+      let delSpeed = 50;
+      function typingEffect() {
+        console.log(i, "iiii");
+        console.log(words[PPP], "words[i]");
+        let word = words[PPP].split("");
+        var loopTyping = function () {
+          if (word.length > 0) {
+            document.getElementById("word").innerHTML += word.shift();
+          } else {
+            delay(function () {
+              deletingEffect(); 
+            }, deleteDelay); 
+            return false;
+          }
+          timer = setTimeout(loopTyping, typeSpeed);
+        };
+        loopTyping();
+      }
+
+      function deletingEffect() {
+        let word = words[PPP].split("");
+        var loopDeleting = function () {
+          if (word.length > 0) {
+            word.pop();
+            document.getElementById("word").innerHTML = word.join("");
+          } else {
+            if (words.length > PPP + 1) {
+              PPP++;
+            } else {
+              PPP = 0;
+            }
+            typingEffect();
+            return false;
+          }
+
+          timer = setTimeout(loopDeleting, delSpeed);
+        };
+
+        loopDeleting();
+      }
+
+      var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+          clearTimeout(timer);
+          timer = setTimeout(callback, ms);
+        };
+      })();
+      typingEffect();
+    </script>
+  </body>
+</html>
